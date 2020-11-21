@@ -94,11 +94,6 @@ if slack_client.rtm_connect():
                     reply = getSongs(message_text)
                     slackReply(reply)
 
-                elif re.match(r'.*(/a|/agency).*', message_text, re.IGNORECASE):
-                    newMessage = refineMessage(message_text)
-                    agencies = getAgencyInfo(newMessage)
-                    slackReply(agencies)
-
                 elif re.match(r'.*(/h|/help).*', message_text, re.IGNORECASE):                  #display help
                     helpFile = open('help.txt','r')
                     slackReply(helpFile.read())
