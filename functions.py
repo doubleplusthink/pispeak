@@ -15,26 +15,6 @@ from configimport import *
 def cancelAudio():
     bashCommand = 'killall mplayer & killall mpg123'
     subprocess.call(bashCommand, shell=True)
-
-def getAgencyInfo(agencyString):
-    db = pymysql.connect (host = "localhost", db = "agencies", user = "pispeak", passwd = "journal2019", charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
-    words = agencyString
-    words = words.replace('/agency', '')
-    words = words.replace('/a', '')
-    words = words.strip()
-    resultString = ''
-    with db.cursor() as cursor:
-        if len(words.split(',')) < 2:
-            query = """SELECT * from agency where agencyName like'%""" + words + """%' order by agencyName limit 10;"""
-        else:
-            query = """SELECT * from agency where agencyName like'%""" + words.split(',')[0].strip() + """%' and productType ='""" + words.split(',')[1].strip() + """' order by agencyName limit 10;"""
-        cursor.execute(query)
-        results = cursor.fetchall()
-        if len(results) < 1:
-            resultString = 'No results found. :disappointed_relieved:'
-        for item in results:
-            resultString = resultString + item['agencyName'] +' *RSM:* '+ '`' + item['accountManagerName'] + '`' + ' *Product:* ' + '`' + item['productType'] + '`' + '\n'
-    return (resultString)
 	
 def getCpu():
     cpu_pct = psutil.cpu_percent(interval=1, percpu=False)
