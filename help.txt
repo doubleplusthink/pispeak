@@ -7,5 +7,6 @@ CPU : display CPU usage
 /q | /stop | /shutup | /cancel | /end | /quiet | /quit : Stop playing what is currently playing
 /s | /say | /speak : pibot will say whatever comes next. To say something in another accent, you can use /(language code) (eg. pi /s /au put another shrimp on the barbie).  Available languanges are as follows: au(Australia), ca(Canada), gb(UK), gh(Ghana), ie(Ireland), in(India), ng(Nigeria), nz(New Zealand), ph(Philippines), tz(Tanzania), uk(UK), us(US), za(South Africa)
 /search: Use this to search for audio files. Syntax: pi /search 'part_of_filename'
-/a | /agency agencyName [,productType(ecourt/justware)]: Search to find who the AM is for an agency
 /h|/help: Display this help message
+
+Do you enjoy using piSpeak? Donate with Venmo! @doubleplusthink
