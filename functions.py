@@ -6,7 +6,6 @@ import re
 import subprocess
 import os
 import sox
-import pymysql.cursors
 import math
 import time
 from gtts import gTTS
