@@ -10,3 +10,4 @@ CPU : display CPU usage
 /h|/help: Display this help message
 
 Do you enjoy using piSpeak? Donate with Venmo! @doubleplusthink
+Thank you! 
