@@ -73,46 +73,30 @@ def postSay(commandText):
     words = words.replace('/s', '')
     words = words.replace('"', '')
     words = words.lower()
-    swearJar = ['bitch', 'cock', 'cunt', 'ass', 'shit', 'nigger', 'asshole', 'fuck', 'fucking', 'damn']
+    swearFile = open('swearjar.txt','r')
+    swearJar = swearFile.readlines()
+    for i in range(len(swearJar)):
+        swearJar[i] = swearJar[i].strip()
+    swearFile.close()
     for s in swearJar:
         words = words.replace(s, 'beep')
-    if re.match(r'.*(/au).*', words, re.IGNORECASE):
-        lang='en-au'
-    elif re.match(r'.*(/ca).*', words, re.IGNORECASE):
-        lang='en-ca'
-    elif re.match(r'.*(/gb).*', words, re.IGNORECASE):
-        lang='en-uk'
-    elif re.match(r'.*(/gh).*', words, re.IGNORECASE):
-        lang='en-gh'
-    elif re.match(r'.*(/ie).*', words, re.IGNORECASE):
-        lang='en-ie'
-    elif re.match(r'.*(/in).*', words, re.IGNORECASE):
-        lang='en-in'
-    elif re.match(r'.*(/ng).*', words, re.IGNORECASE):
-        lang='en-ng'
-    elif re.match(r'.*(/nz).*', words, re.IGNORECASE):
-        lang='en-nz'
-    elif re.match(r'.*(/ph).*', words, re.IGNORECASE):
-        lang='en-ph'
-    elif re.match(r'.*(/tz).*', words, re.IGNORECASE):
-        lang='en-tz'
-    elif re.match(r'.*(/uk).*', words, re.IGNORECASE):
-        lang='en-uk'
-    elif re.match(r'.*(/za).*', words, re.IGNORECASE):
-        lang='en-za'
-    elif re.match(r'.*(/jp).*', words, re.IGNORECASE):
-        lang='ja'
-    else:
-        lang='en-us'
-    langs=['/au', '/ca', '/gb', '/gh', '/ie', '/in', '/ng', '/nz', '/ph', '/tz', '/uk', '/us', '/za','/en','/jp']
+    lang = 'en-us'
+    langs=['au', 'ca', 'gb', 'gh', 'ie', 'in', 'ng', 'nz', 'ph', 'tz', 'uk', 'us', 'za', 'en', 'jp']
+    if len(words.split('/')) > 1:
+        lang = words.split('/')[1][:2]
+        if lang in langs:
+            lang = 'en-'+lang
+
     for l in langs:
         words = words.replace(l,'')
-
+    words = words.replace('/', '').strip()
+    print (words)
     tts = gTTS(words,lang=lang)
     tts.save('temp.mp3')
 
     bashCommand = 'mpg123 temp.mp3 && rm temp.mp3 &'
     subprocess.call(bashCommand, shell=True)
+
 	
 def postSong(filetype, url, audioname):
     if re.match(r'(mp3|wav)', filetype, re.IGNORECASE):
